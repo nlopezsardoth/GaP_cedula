@@ -28,7 +28,7 @@ PARA INSTALAR POPPLER
 
 http://blog.alivate.com.au/poppler-windows/ 
 
-descargar de la url y dentro de venv (ambiente virtual) crear una carpeta llamada "popler" y copiar los archivos que se cuentran dentro del zip descargado dentro de esta..
+descargar de la url y dentro de venv (ambiente virtual) crear una carpeta llamada "poppler" y copiar los archivos que se cuentran dentro del zip descargado dentro de esta..
 
 para utilizar en 
 
