@@ -19,6 +19,10 @@ from pdf2image import convert_from_path, convert_from_bytes
 from base64 import b64decode
 import codecs
 
+import easyocr
+import io
+import numpy as np
+
 app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost/GaP_cedula"
 CORS(app, resources={r"*": {"origins": "*"}})
@@ -46,6 +50,32 @@ mongo = PyMongo(app)
         #text.append(pytesseract.image_to_string(page, lang='spa'))
 
     #return text
+
+    def pil_to_cv2(image):
+        open_cv_image = np.array(image)
+        return open_cv_image[:, :, ::-1].copy()
+
+
+    def base64toTxt(base64Str):
+        bytesStr = b64decode(base64Str, validate=True)
+
+        if bytesStr[0:4] != b'%PDF':
+            raise ValueError('Missing the PDF file signature')
+
+
+        pages = convert_from_bytes(bytesStr, fmt='jpeg', poppler_path=r'.\venv\poppler\bin')
+
+        reader = easyocr.Reader(["es"]) # need to run only once to load model into memory
+
+        results=[]
+        for page in pages:
+            result=reader.readtext(pil_to_cv2(page),detail=0)
+            for i in range(len(result)):
+                results.append(result[i])
+        return results
+
+            
+
     
 
 
