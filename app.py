@@ -117,7 +117,7 @@ def base64toTxt(base64String):
 
     
 
-@app.route('/cedula', methods=['GET'])
+@app.route('/cedula', methods=['POST'])
 @cross_origin()
 def leerCedula():
     string = request.get_json()
