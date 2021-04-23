@@ -97,18 +97,15 @@ def base64toTxt(base64String):
         if results[i].upper() == "FECHA DE NACIMIENTO" or results[i].upper() == "Fecha de nacimiento":
             datos["Fecha de nacimiento"] = str(results[i+1])
             datos["Lugar de nacimiento"] = str(results[i+2])
-            break
         
-        elif results[i].upper() == "ESTATURA":
+        if results[i].upper() == "ESTATURA":
             if results[i-1].upper() == "M" or results[i-1].upper() == "F":
                 datos["Estatura"] = str(results[i-3])
-                datos["RH"] = str(results[i-2])
+                datos["G.S. RH"] = str(results[i-2])
                 datos["Sexo"] = str(results[i-1])
-                break
             else:
                 datos["Estatura"] = str(results[i-2])
-                datos["RH"] = str(results[i-1])
-                break
+                datos["G.S. RH"] = str(results[i-1])
         
 
     return datos
